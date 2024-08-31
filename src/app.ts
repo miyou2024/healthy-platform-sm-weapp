@@ -4,6 +4,7 @@ import './app.less'
 
 const App = createApp({
   async onShow () {
+    console.log(`App.onShow`, process.env);
   },
 })
 App.use(IconFont)

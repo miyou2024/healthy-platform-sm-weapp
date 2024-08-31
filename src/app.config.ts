@@ -1,9 +1,9 @@
 export default defineAppConfig({
   pages: [
+    'pages/account/index',
     'pages/cart/index',
     'pages/address-edit/index',
     'pages/address-list/index',
-    'pages/account/index',
     'pages/index/index',
   ],
   tabBar: {
