@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "dist/",
   "projectname": "healthy-platform-sm-weapp",
-  "description": "vue3-nutui4",
+  "description": "healthy-platform-sm-weapp",
   "setting": {
     "urlCheck": true,
     "es6": false,
@@ -13,7 +13,8 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "condition": false
   },
   "compileType": "miniprogram",
   "libVersion": "3.5.6",
