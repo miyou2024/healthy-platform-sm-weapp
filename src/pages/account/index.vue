@@ -2,6 +2,7 @@
 import {ref} from 'vue';
 import Taro from '@tarojs/taro'
 import {Image} from '@tarojs/components';
+import { FunctionCloudBase } from '../../utils/f.cloud'
 
 const avatar = ref('');
 
@@ -24,8 +25,24 @@ function onGetAvatar(res) {
   }
 }
 
-function onGetPhoneNumber(res) {
+async function onGetPhoneNumber(res) {
   console.log('onGetPhoneNumber', res)
+
+  const fc = new FunctionCloudBase(
+      process.env.APP_ID,
+      process.env.APP_ENV,
+      true
+  );
+
+  await fc.initFunctionInstance();
+  await fc.initCloudBaseInstance();
+  const r = await fc.wxAppInstance.callFunction({
+    name: 'passport_get_phone',
+    data: {
+      code: res.detail.code,
+    }
+  });
+  console.log('r', r);
 }
 
 </script>

@@ -8,3 +8,6 @@ node_modules/
 project.private.config.json
 .idea
 tmp
+config/local.ts
+.env.*.local
+.env.local
