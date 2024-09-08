@@ -45,6 +45,37 @@ async function onGetPhoneNumber(res) {
   console.log('r', r);
 }
 
+async function  onRequestPayment() {
+  console.log('onRequestPayment');
+  const fc = new FunctionCloudBase(
+      process.env.APP_ID,
+      process.env.APP_ENV,
+      false
+  );
+  await fc.initFunctionInstance();
+  fc.wxAppInstance.callFunction({
+    // 云函数名称
+    name: 'get_pay_payment',
+    success: (res) => {
+      console.log('success', res);
+      const payment = (res as any).result.payment
+      Taro.requestPayment({
+        ...payment,
+        totalFre: 1,
+        success (res) {
+          console.log('pay success', res)
+        },
+        fail (err) {
+          console.error('pay fail', err)
+        }
+      });
+    },
+    fail: (err) => {
+      console.log('fail', err)
+    }
+  });
+}
+
 </script>
 
 
@@ -63,6 +94,9 @@ async function onGetPhoneNumber(res) {
     </nut-col>
     <nut-col :span="22" :offset="1">
       <nut-button block type="primary">联系客服</nut-button>
+    </nut-col>
+    <nut-col :span="22" :offset="1">
+      <nut-button block type="primary" @click="onRequestPayment">支付</nut-button>
     </nut-col>
   </nut-row>
 </template>
