@@ -50,7 +50,7 @@ async function  onRequestPayment() {
   const fc = new FunctionCloudBase(
       process.env.APP_ID,
       process.env.APP_ENV,
-      false
+      true
   );
   await fc.initFunctionInstance();
   fc.wxAppInstance.callFunction({
@@ -61,7 +61,6 @@ async function  onRequestPayment() {
       const payment = (res as any).result.payment
       Taro.requestPayment({
         ...payment,
-        totalFre: 1,
         success (res) {
           console.log('pay success', res)
         },
@@ -93,7 +92,7 @@ async function  onRequestPayment() {
       <nut-cell title="我的地址" :is-link="true"></nut-cell>
     </nut-col>
     <nut-col :span="22" :offset="1">
-      <nut-button block type="primary">联系客服</nut-button>
+      <nut-button block open-type="contact" type="primary">联系客服</nut-button>
     </nut-col>
     <nut-col :span="22" :offset="1">
       <nut-button block type="primary" @click="onRequestPayment">支付</nut-button>
